@@ -407,6 +407,13 @@ describe "SequenceDiagramBuilder", ->
         expect(iact.find("> .occurrence").length).toBe 1
 
   describe "var", ->
+    describe "_", ->
+      it "equals to data('jumly')._", ->
+        diag = @builder.build """
+          @found 'a'
+          """
+        expect(diag._).toBe diag.data('jumly')._
+
     describe "found", ->
       beforeEach ->
         @diagram = @builder.build """

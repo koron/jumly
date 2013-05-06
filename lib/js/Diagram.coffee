@@ -8,6 +8,7 @@ class Diagram extends HTMLElement
     super()
     @addClass "diagram"
     this._ = {}
+    @data("jumly")._ = this._
 
 ## Enable var with given name
 Diagram::_var = (varname, e)->

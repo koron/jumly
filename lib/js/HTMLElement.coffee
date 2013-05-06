@@ -7,6 +7,7 @@ class HTMLElement
     f? me
     me.find(".name").text args if args
     me.data "_self", me
+    me.data "jumly", {}
 
   @to_css_name: (s)->
     (if s.match /Diagram$/
