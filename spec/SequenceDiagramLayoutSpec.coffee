@@ -476,7 +476,7 @@ utils.unless_node -> describe "SequenceDiagramLayout", ->
             """
           div.append @diagram
           @layout.layout @diagram
-          @ref = @diagram.respond_resource
+          @ref = @diagram._.respond_resource
 
         it "is at right to the left of 1st .occurrence", ->
           occur = @diagram.find ".occurrence:eq(0)"
@@ -486,7 +486,7 @@ utils.unless_node -> describe "SequenceDiagramLayout", ->
           occur = @diagram.find ".occurrence:eq(0)"
           expect(_left @ref).toBeLessThan _right occur
 
-        it "is at left to the center of 2rd .participant", ->
+        it "is at left to the center of 2nd .participant", ->
           obj = @diagram.find ".participant:eq(1)"
           expect(_right @ref).toBeLessThan (_left obj) + obj.outerWidth()/2
 
@@ -520,11 +520,11 @@ utils.unless_node -> describe "SequenceDiagramLayout", ->
           @layout.layout b
 
           ## depends on other nodes metrics
-          expect(a.to_me.width()).toBeGreaterThan 0 #parseInt a.to_me.css("min-width")
-          expect(a.to_me.width()).toBeLessThan a.outerWidth()
+          expect(a._.to_me.width()).toBeGreaterThan 0 #parseInt a.to_me.css("min-width")
+          expect(a._.to_me.width()).toBeLessThan a.outerWidth()
 
           ## specified by css
-          expect(b.to_you.width()).toBe 80
+          expect(b._.to_you.width()).toBe 80
 
         it "fits to lifelines", ->
           diag = @builder.build """

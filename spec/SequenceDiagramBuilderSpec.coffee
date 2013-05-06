@@ -37,7 +37,7 @@ describe "SequenceDiagramBuilder", ->
             @found 'a b'
             @_name = a_b.find(".name").text()
             """
-          expect(@diagram['a_b']).toBeDefined()
+          expect(@diagram._['a_b']).toBeDefined()
           expect(@builder._name).toBe 'a b'
 
       describe "empty string given", ->
@@ -239,7 +239,7 @@ describe "SequenceDiagramBuilder", ->
         expect(@frag.find(".name:eq(0)").text()).toBe "lock"
 
       it "can be refered by property", ->
-        expect(@diag.lock).toBe @frag.data "_self"
+        expect(@diag._.lock).toBe @frag.data "_self"
       
       it "can be refered by a var", ->
         expect(@builder._lock).toBe @frag.data "_self"
@@ -251,14 +251,14 @@ describe "SequenceDiagramBuilder", ->
           @found "open", ->
           @ref "see"
           """
-        expect(diag.see).toBe diag.find(".interaction + .ref:eq(0)").data "_self"
+        expect(diag._.see).toBe diag.find(".interaction + .ref:eq(0)").data "_self"
 
       it "can be in .interaction", ->
         diag = @builder.build """
           @found "open", ->
             @ref "see"
           """
-        expect(diag.see).toBe diag.find(".occurrence > .ref:eq(0)").data "_self"
+        expect(diag._.see).toBe diag.find(".occurrence > .ref:eq(0)").data "_self"
 
     describe "loop", ->
       
@@ -416,7 +416,7 @@ describe "SequenceDiagramBuilder", ->
 
       it "can be referred", ->
         expect(@builder.that).toBe @diagram.find(".participant:eq(0)").data "_self"
-        expect(@diagram.var_found).toBe @builder.that
+        expect(@diagram._.var_found).toBe @builder.that
       
     describe "message", ->
       beforeEach ->
@@ -428,7 +428,7 @@ describe "SequenceDiagramBuilder", ->
 
       it "can be referred", ->
         expect(@builder.that).toBe @diagram.find(".participant:eq(1)").data "_self"
-        expect(@diagram.var_ano).toBe @builder.that
+        expect(@diagram._.var_ano).toBe @builder.that
       
     describe "create", ->
       beforeEach ->
@@ -440,7 +440,7 @@ describe "SequenceDiagramBuilder", ->
 
       it "can be referred", ->
         expect(@builder.that).toBe @diagram.find(".participant:eq(1)").data "_self"
-        expect(@diagram.var_create).toBe @builder.that
+        expect(@diagram._.var_create).toBe @builder.that
 
     describe "ref", ->
       beforeEach ->
@@ -451,7 +451,7 @@ describe "SequenceDiagramBuilder", ->
 
       it "can be referred", ->
         expect(@builder.that).toBe @diagram.find(".ref:eq(0)").data "_self"
-        expect(@diagram.var_ref).toBe @builder.that
+        expect(@diagram._.var_ref).toBe @builder.that
 
       describe "in .alt", ->
         beforeEach ->
@@ -466,7 +466,7 @@ describe "SequenceDiagramBuilder", ->
             """
 
         it "can be referred by id", ->
-          expect(@diagram.get_the_moved_page).toBe @builder.that
+          expect(@diagram._.get_the_moved_page).toBe @builder.that
   
   describe "css", ->
     beforeEach ->
@@ -488,4 +488,4 @@ describe "SequenceDiagramBuilder", ->
         """
 
     it "equals to $.find", ->
-      expect(@diagram.hi).toBe @builder.that
+      expect(@diagram._.hi).toBe @builder.that
