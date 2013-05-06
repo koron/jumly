@@ -9,7 +9,7 @@ core = self.require "core"
 RobustnessDiagram::_node_of = (n, k)->
   id = core._to_id n
   ref = core._to_ref id
-  return this[ref] if this[ref]
+  return @_has ref if @_has ref
 
   e = new IconElement n, kind:k
   @_reg_by_ref id, e

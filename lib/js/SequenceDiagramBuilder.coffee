@@ -29,8 +29,7 @@ SequenceDiagramBuilder::found = (sth, callback)->
 SequenceDiagramBuilder::_find_or_create = (sth)->
   a = core._normalize sth
   r = core._to_ref a.id
-  throw new Error("Reserved word '#{r}'") if typeof @_diagram[r] is "function"
-  return @_diagram[r] if @_diagram[r]
+  return @_diagram._has r if @_diagram._has r
   obj = new SequenceParticipant sth
   @_diagram._reg_by_ref a.id, obj
   @_diagram.append obj
@@ -129,7 +128,7 @@ SequenceDiagramBuilder::reply = (a, b)->
   obj = b
   if typeof b is "string"
     ref = core._to_ref core._to_id b
-    obj = @_diagram[ref] if @_diagram[ref]
+    obj = @_diagram._has ref if @_diagram._has ref
 
   f = (occur, n)-> if occur.is_on_another() then f(occur._parent_occurr(), n + 1) else n
   n = f @_curr_occurr(), 0
