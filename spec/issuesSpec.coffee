@@ -75,3 +75,22 @@ describe "issues", ->
       it "can be built without exception", ->
         f = -> (new SequenceDiagramBuilder).build '''@found "get", ->'''
         expect(f).toThrow new Error("Reserved word 'get'")
+
+  utils.unless_node -> describe "#18", ->
+
+    describe "bottom and top", ->
+      it "should not be collapsed", ->
+        diag = (new SequenceDiagramBuilder).build '''
+          @found "App User", ->
+            @note "Product ID & price"
+            @create "A"
+          '''
+        div.append diag
+        (new SequenceDiagramLayout).layout diag
+
+        note = diag.find ".note:eq(0)"
+        part = diag.find ".participant:eq(1)"
+        bottom = note.offset().top + note.outerHeight() - 1
+        top    = part.offset().top
+
+        expect(top).toBeGreaterThan bottom
